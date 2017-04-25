@@ -1,5 +1,7 @@
 import Base: show,(*)
 
+export AffineMap, square_check
+
 """
 An `AffineMap` represents a mapping of the plane to itself.
 """

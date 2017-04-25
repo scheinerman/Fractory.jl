@@ -1,5 +1,6 @@
 import Base: show,size
-using PyPlot
+
+export PixelMap
 
 """
 `point2pixel(n,xy)` determines which pixel in an `n`-by-`n`

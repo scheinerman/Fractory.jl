@@ -1,3 +1,5 @@
+export IFS, Sierpinski
+
 """
 `IFS` is an iterated function system.
 """
