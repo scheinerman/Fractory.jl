@@ -1,6 +1,6 @@
 import Base: show,size
 
-export PixelMap
+export PixelPicture
 
 """
 `point2pixel(n,xy)` determines which pixel in an `n`-by-`n`
