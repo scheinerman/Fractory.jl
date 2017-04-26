@@ -1,4 +1,4 @@
-export IFS, Sierpinski
+export IFS, Sierpinski, Sponge
 
 """
 `IFS` is an iterated function system.
@@ -55,6 +55,23 @@ function Sierpinski()
 end
 
 """
+`Sponge()` returns an `IFS` for Sierpinski's sponge.
+"""
+function Sponge()
+  A = (1/3)*eye(2)
+  f1 = AffineMap(A,[0,0])
+  f2 = AffineMap(A,[0,1/3])
+  f3 = AffineMap(A,[0,2/3])
+  g1 = AffineMap(A,[1/3,0])
+  g3 = AffineMap(A,[1/3,2/3])
+  h1 = AffineMap(A,[2/3,0])
+  h2 = AffineMap(A,[2/3,1/3])
+  h3 = AffineMap(A,[2/3,2/3])
+  return IFS(f1,f2,f3,g1,g3,h1,h2,h3)
+end
+
+
+"""
 `visualize(F)` for an `IFS` draws the unit square (dotted)
 and the image of the functions in `F` (solid frames).
 """
@@ -63,7 +80,7 @@ function visualize(F::IFS)
   for f in F.funcs
     if !square_check(f)
       warn("$f does not map unit square to itself.")
-    end 
+    end
     visualize(f)
   end
 end
