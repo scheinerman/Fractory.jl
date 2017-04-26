@@ -1,6 +1,6 @@
 import Base: show,(*)
 
-export AffineMap, square_check
+export AffineMap, square_check, visualize
 
 """
 An `AffineMap` represents a mapping of the plane to itself.
@@ -50,4 +50,22 @@ to the corners of the unit square.
 function square_check(f::AffineMap)
   corners = ([0,0], [0,1], [1,0], [1,1])
   return all(square_check(f,x) for x in corners)
+end
+
+function quad_draw(pts, marker::String="-")
+  x = [v[1] for v in pts]
+  y = [v[2] for v in pts]
+  plot(x,y,marker,color="k")
+  nothing
+end
+
+function visualize(f::AffineMap)
+  corners = [ [0,0], [0,1], [1,1], [1,0], [0,0] ]
+  quad_draw(corners,":")
+  poly = map(f,corners)
+  quad_draw(poly)
+  axis("equal")
+  axis("off")
+  axis([-0.25,1.25,-0.25,1.25])
+  nothing
 end

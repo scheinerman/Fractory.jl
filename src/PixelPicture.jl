@@ -1,6 +1,6 @@
-import Base: show,size
+import Base: show, size
 
-export PixelPicture
+export PixelPicture, draw, randomize!
 
 """
 `point2pixel(n,xy)` determines which pixel in an `n`-by-`n`
@@ -62,19 +62,41 @@ function get_points(P::PixelPicture)
   return Set(result)
 end
 
+"""
+`randomize!(P)` fills the `PixelPicture` with random noise.
+"""
+function randomize!(P::PixelPicture)
+  n = size(P)
+  P.data = rand(Bool,n,n)
+  nothing
+end
+
+
 
 """
-`set_points(P,pts)` sets the set of points in `P`. Here, `pts` is a
+`set_points!(P,pts)` sets the set of points in `P`. Here, `pts` is a
 set of 2-vectors.
 """
-function set_points{T<:Real}(P::PixelPicture, pts::Set{Array{T,1}})
+function set_points!{T<:Real}(P::PixelPicture, pts::Set{Array{T,1}})
   n = size(P)
   P.data = zeros(Bool,n,n)
   for xy in pts
     ij = point2pixel(n,xy)
     i = ij[1]
     j = ij[2]
-    P.data[i,j] = true
+    if 1<=i<=n && 1<=j<=n
+      @inbounds P.data[i,j] = true
+    end
   end
+  nothing
+end
+
+"""
+`draw(P)` draws the `PixelPicture` on the screen.
+"""
+function draw(P::PixelPicture)
+  clf()
+  spy(P.data)
+  axis("off")
   nothing
 end

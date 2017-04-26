@@ -53,3 +53,17 @@ function Sierpinski()
   f3 = AffineMap(A,[0.25,0.5])
   return IFS(f1,f2,f3)
 end
+
+"""
+`visualize(F)` for an `IFS` draws the unit square (dotted)
+and the image of the functions in `F` (solid frames).
+"""
+function visualize(F::IFS)
+  clf()
+  for f in F.funcs
+    if !square_check(f)
+      warn("$f does not map unit square to itself.")
+    end 
+    visualize(f)
+  end
+end
