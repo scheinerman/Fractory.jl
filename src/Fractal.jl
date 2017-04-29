@@ -1,5 +1,12 @@
 export Fractal
+"""
+A `Fractal` contains an `IFS` (iterated function system) and a
+`PixelPicture` (bitmap image) that the `IFS` generates.
 
+Standard constructors:
+* `Fractal(F::IFS,P::PixelPicture)`
+* `Fractal(F::IFS,n::Int)`
+""" 
 type Fractal
   F::IFS
   P::PixelPicture
@@ -8,7 +15,7 @@ type Fractal
   end
 end
 
-function Fractal(F:IFS, n::Int)
+function Fractal(F::IFS, n::Int)
   @assert n>0
   P = PixelPicture(n)
   return Fractal(F,n)
