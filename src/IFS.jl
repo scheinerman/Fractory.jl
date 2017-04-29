@@ -1,4 +1,4 @@
-export IFS, Sierpinski, Sponge
+export IFS, Sierpinski_IFS, Sponge_IFS
 
 """
 `IFS` is an iterated function system.
@@ -44,9 +44,9 @@ end
 
 
 """
-`Sierpinski()` returns an `IFS` that creates a Sierpinski triangle.
+`Sierpinski_IFS()` returns an `IFS` that creates a Sierpinski triangle.
 """
-function Sierpinski()
+function Sierpinski_IFS()
   A = 0.5 * eye(2)
   f1 = AffineMap(A,[0,0])
   f2 = AffineMap(A,[0.5,0])
@@ -55,9 +55,9 @@ function Sierpinski()
 end
 
 """
-`Sponge()` returns an `IFS` for Sierpinski's sponge.
+`Sponge_IFS()` returns an `IFS` for Sierpinski's sponge.
 """
-function Sponge()
+function Sponge_IFS()
   A = (1/3)*eye(2)
   f1 = AffineMap(A,[0,0])
   f2 = AffineMap(A,[0,1/3])

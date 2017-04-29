@@ -5,6 +5,7 @@ using PyPlot
 include("AffineMap.jl")
 include("IFS.jl")
 include("PixelPicture.jl")
+include("Fractal.jl")
 
 export step!
 
