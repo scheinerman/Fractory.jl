@@ -5,22 +5,23 @@ export PixelPicture, draw, randomize!
 """
 `point2pixel(n,xy)` determines which pixel in an `n`-by-`n`
 grid corresponds to the point with coordinates given by `xy`.
+Retuns a tuple.
 """
 function point2pixel{T<:Real}(n::Int, xy::Vector{T})
   x = xy[1]
   y = xy[2]
   i = Int(round((n-1)*(1-y)+1))
   j = Int(round((n-1)*x+1))
-  return [i,j]
+  return (i,j)
 end
 
 """
 `pixel2point(n,ij)` determines the `xy`-coordinates of the point
-in the middle of the `i,j`-pixel in an `n`-by-`n` grid.
+in the middle of the `i,j`-pixel in an `n`-by-`n` grid. Returns
+a vector.
 """
-function pixel2point(n,ij::Vector{Int})
-  i = ij[1]
-  j = ij[2]
+function pixel2point(n::Int,ij::Tuple{Int,Int})
+  i,j = ij
   x = (j-1)/(n-1)
   y = 1 - (i-1)/(n-1)
   return [x,y]
@@ -57,9 +58,9 @@ in this `PixelPicture`.
 """
 function get_points(P::PixelPicture)
   n = size(P)
-  pix_coords = [ [i,j] for i=1:n for j=1:n if P.data[i,j] ]
+  pix_coords = ( (i,j) for i=1:n for j=1:n if P.data[i,j] )
   result = ( pixel2point(n,ij) for ij in pix_coords )
-  return Set(result)
+  return result
 end
 
 """
@@ -71,22 +72,11 @@ function randomize!(P::PixelPicture)
   nothing
 end
 
-
-
-"""
-`set_points!(P,pts)` sets the set of points in `P`. Here, `pts` is a
-set of 2-vectors.
-"""
-function set_points!{T<:Real}(P::PixelPicture, pts::Set{Array{T,1}})
+function set_point!(P::PixelPicture,xy::Array{Float64,1})
   n = size(P)
-  P.data = zeros(Bool,n,n)
-  for xy in pts
-    ij = point2pixel(n,xy)
-    i = ij[1]
-    j = ij[2]
-    if 1<=i<=n && 1<=j<=n
-      @inbounds P.data[i,j] = true
-    end
+  i,j = point2pixel(n,xy)
+  if 1<=i<=n && 1<=j<=n
+    @inbounds P.data[i,j]=true
   end
   nothing
 end
