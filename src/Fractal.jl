@@ -1,4 +1,4 @@
-export Fractal, Sierpinski, Sponge
+export Fractal, Triangle, Carpet
 """
 A `Fractal` contains an `IFS` (iterated function system) and a
 `PixelPicture` (bitmap image) that the `IFS` generates.
@@ -61,10 +61,10 @@ end
 
 
 """
-`Sierpinski(n)` set up `n`-by-`n` Sierpinski triangle.
+`Triangle(n)` set up `n`-by-`n` Triangle triangle.
 """
-function Sierpinski(n::Int)
-  F = Sierpinski_IFS()
+function Triangle(n::Int)
+  F = Triangle_IFS()
   P = PixelPicture(n)
   FF = Fractal(F,P)
 
@@ -73,10 +73,10 @@ end
 
 
 """
-`Sponge(n)` set up an `n`-by-`n` sponge gasket.
+`Carpet(n)` set up an `n`-by-`n` Carpet gasket.
 """
-function Sponge(n::Int)
-  F = Sponge_IFS()
+function Carpet(n::Int)
+  F = Carpet_IFS()
   P = PixelPicture(n)
   FF = Fractal(F,P)
 

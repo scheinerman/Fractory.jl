@@ -1,5 +1,3 @@
-import Base: show, size
-
 export PixelPicture, draw, randomize!
 
 """

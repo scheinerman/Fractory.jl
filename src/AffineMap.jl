@@ -1,5 +1,3 @@
-import Base: show,(*)
-
 export AffineMap, square_check, visualize
 
 """
