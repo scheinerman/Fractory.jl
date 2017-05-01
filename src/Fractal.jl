@@ -82,3 +82,8 @@ function Carpet(n::Int)
 
   return FF
 end
+
+
+set_point!(F::Fractal,xy::Array{Float64,1})=set_point!(F.P,xy)
+
+get_points(F::Fractal)=get_points(F.P)
