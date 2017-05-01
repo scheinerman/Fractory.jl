@@ -1,4 +1,4 @@
-export PixelPicture, draw, randomize!
+export PixelPicture, draw, randomize!, set_point!, get_points
 
 """
 `point2pixel(n,xy)` determines which pixel in an `n`-by-`n`
