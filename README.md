@@ -8,4 +8,4 @@ This doesn't work too well.
 
 ## Example
 
-![sponge](./sponge.png)
+![carpet](./carpet.png)
